@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Locations")
+@RequestMapping("/locations")
 public class LocationController {
 
     @Autowired
     LocationService service;
 
-    @GetMapping
+    @GetMapping("/{id}")
     public Location get(int id){
         return service.get(id);
     }

@@ -1,0 +1,13 @@
+
+{
+  "locations": [
+    {
+      "location": "desk",
+      "total": 2
+    },
+    {
+      "location": "kitchen",
+      "total": 1
+    }
+  ]
+}

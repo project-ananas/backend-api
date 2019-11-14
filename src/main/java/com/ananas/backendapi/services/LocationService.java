@@ -12,6 +12,8 @@ public class LocationService {
     @Autowired
     LocationRepository repository;
 
+    public void save(Location l){ repository.save(l); }
+
     public Location get(int id) {
         return repository.findById(id).get();
     }

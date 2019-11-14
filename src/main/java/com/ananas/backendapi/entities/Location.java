@@ -20,7 +20,7 @@ public class Location {
 
     String name;
 
-    Timestamp time;
-
     int amount;
+
+    Timestamp time;
 }

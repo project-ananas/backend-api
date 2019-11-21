@@ -1,13 +1,13 @@
 package com.ananas.backendapi.controllers;
 
 import com.ananas.backendapi.entities.Location;
+import com.ananas.backendapi.repositories.LocationRepository;
 import com.ananas.backendapi.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,6 +17,23 @@ public class LocationController {
     @Autowired
     LocationService service;
 
-    @GetMapping("/{amount}")
-    public List<Location> getAll(@PathVariable int amount){ return service.getAll(amount); }
+    @Autowired
+    LocationRepository repository;
+
+
+    @PostMapping()
+    public Location create(@RequestBody Location location){
+        return service.save(location);
+    }
+
+
+
+    @PostMapping("/all")
+    public ResponseEntity addAll(ArrayList<Location> locations){
+        service.saveAll(locations);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping()
+    public List<Location> getAll(){ return service.getAll(); }
 }

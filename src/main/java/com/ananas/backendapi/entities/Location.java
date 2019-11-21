@@ -18,9 +18,27 @@ public class Location {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    String name;
-
+    String location;
+    int total;
     Timestamp time;
 
-    int amount;
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }

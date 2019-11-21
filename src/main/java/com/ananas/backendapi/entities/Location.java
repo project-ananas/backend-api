@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -20,7 +21,7 @@ public class Location {
 
     String location;
     int total;
-    Timestamp time;
+    private Timestamp time = new Timestamp(System.currentTimeMillis());
 
     public void setTime(Timestamp time) {
         this.time = time;

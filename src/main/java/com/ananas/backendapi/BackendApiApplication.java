@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class BackendApiApplication{
 
 	// TODO: Move this property to application.properties
-	private static final int TIME = 1;
+	private static final int TIME = 15;
 	private static final TimeUnit TIME_UNIT = TimeUnit.MINUTES;
 
 

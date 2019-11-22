@@ -13,7 +13,6 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataStoreReader {
 

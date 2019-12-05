@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 public class BackendApiApplication{
 
-	// TODO: Move this property to application.properties
 	private static final int TIME = 15;
 	private static final TimeUnit TIME_UNIT = TimeUnit.MINUTES;
 
@@ -19,6 +18,8 @@ public class BackendApiApplication{
 		SpringApplication.run(BackendApiApplication.class, args);
 		GatewayService service = new GatewayService(TIME,TIME_UNIT);
 
+
+		// Launch GET from sensorGateway services
 		Thread t1 = new Thread(service);
 		t1.start();
 	}

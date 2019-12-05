@@ -10,17 +10,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Sends GET requests to the sensor gateway, it parses a list of location objects
+ */
 
 public class DataStoreReader {
 
-    public static final String URL = "http://10.10.101.1:8005/api/v1/by_location/spr22";
+    public static final String URL = "http://10.10.101.1:8005/api/v1/by_location/spr22?randomized=0&num_scanners=4&probability=0.4&history=15";
 
-    public static ArrayList<Location> getLocations(){
+    private DataStoreReader(){}
+
+    public static List<Location> getLocations(){
         String json = getFromUrl();
-        ArrayList<Location> locations = new ArrayList<>();
+        List<Location> locations = new ArrayList<>();
         JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
 
         JsonArray ar = convertedObject.getAsJsonArray("locations");
@@ -32,23 +38,21 @@ public class DataStoreReader {
             loc.setLocation(s.get("location").getAsString());
             loc.setTotal(s.get("total").getAsInt());
             locations.add(loc);
-
-            System.out.println(loc.getLocation() +  " " + loc.getTotal());
         }
 
         return locations;
     }
 
+    // Get Json from URL
     public static String getFromUrl(){
         String s = "";
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000);
+            conn.setConnectTimeout(10000);
             // If no player found or something other happened, return empty player
             if (conn.getResponseCode() != 200) {
-                System.out.println("Not found");
                 return s;
             }
 

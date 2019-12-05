@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstraction class to
+ */
+
 @Service
 public class LocationService {
 
@@ -21,7 +25,7 @@ public class LocationService {
     }
 
     public Location get(int id) {
-        return repository.findById(id).get();
+        return  repository.findById(id).get();
     }
 
     public List<Location> getAll() {

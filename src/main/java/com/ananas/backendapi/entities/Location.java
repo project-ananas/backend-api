@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Location {
 
-    private String location;
+    private String unit;
     private int total;
     private Timestamp time = new Timestamp(System.currentTimeMillis());
 
@@ -31,12 +31,12 @@ public class Location {
         this.time = time;
     }
 
-    public String getLocation() {
-        return location;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public int getTotal() {

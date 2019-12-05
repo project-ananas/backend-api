@@ -20,12 +20,12 @@ import java.util.List;
 
 public class DataStoreReader {
 
-    public static final String URL = "http://10.10.101.1:8005/api/v1/by_location/spr22?randomized=0&num_scanners=4&probability=0.4&history=15";
+    private String URL;
 
-    private DataStoreReader(){}
+    public DataStoreReader(){}
 
-    public static List<Location> getLocations(){
-        String json = getFromUrl();
+    public static List<Location> getLocations(String url){
+        String json = getFromUrl(url);
         List<Location> locations = new ArrayList<>();
         JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
 
@@ -35,7 +35,7 @@ public class DataStoreReader {
             Location loc = new Location();
             JsonObject s = ar.get(i).getAsJsonObject();
 
-            loc.setLocation(s.get("location").getAsString());
+            loc.setUnit(s.get("location").getAsString());
             loc.setTotal(s.get("total").getAsInt());
             locations.add(loc);
         }
@@ -44,11 +44,11 @@ public class DataStoreReader {
     }
 
     // Get Json from URL
-    public static String getFromUrl(){
+    public static String getFromUrl(String uri){
         String s = "";
         StringBuilder sb = new StringBuilder();
         try {
-            URL url = new URL(URL);
+            URL url = new URL(uri);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(10000);
             // If no player found or something other happened, return empty player

@@ -4,14 +4,24 @@ import com.ananas.backendapi.entities.Location;
 import java.util.List;
 
 /**
- * Task that gets data from
+ * Task that gets data from sensor gateway
  */
 
 public class GatewayTask implements Runnable {
 
+    private String url;
+    private boolean debug;
+
+    public GatewayTask(String url, boolean debug){
+        this.url = url;
+        this.debug = debug;
+    }
+
     @Override
     public void run() {
-        System.out.println("GatewayService running");
-        List<Location> locations = DataStoreReader.getLocations();
-        if(!locations.isEmpty()) DataStoreSaver.postList(locations); }
+        if(debug) return;
+            System.out.println("Reading data from sensor gateway");
+            List<Location> locations = DataStoreReader.getLocations(url);
+            if(locations != null) DataStoreSaver.postList(locations);
+    }
 }

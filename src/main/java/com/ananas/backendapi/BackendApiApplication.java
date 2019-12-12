@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -32,6 +33,7 @@ public class BackendApiApplication{
 
 	public static void main(String[] args) {
 		// Launch Spring application
+		System.setProperty("spring.config.location", "target/classes/application.properties");
 		SpringApplication.run(BackendApiApplication.class, args);
 		GatewayService service = new GatewayService(component);
 

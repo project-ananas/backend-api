@@ -1,12 +1,16 @@
 package com.ananas.backendapi.gatewayReader;
 
 import com.ananas.backendapi.util.ConfigProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class GatewayService implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger(GatewayService.class);
+
     private int time;
     private TimeUnit timeUnit;
     private String url;
@@ -29,7 +33,7 @@ public class GatewayService implements Runnable {
             TimeUnit.MILLISECONDS.sleep(20000);
         }
         catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error("Thread did not run");
         }
     }
 }

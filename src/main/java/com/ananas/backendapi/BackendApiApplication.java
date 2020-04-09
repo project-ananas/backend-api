@@ -2,7 +2,6 @@ package com.ananas.backendapi;
 
 import com.ananas.backendapi.gatewayReader.GatewayService;
 import com.ananas.backendapi.util.ConfigProperties;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

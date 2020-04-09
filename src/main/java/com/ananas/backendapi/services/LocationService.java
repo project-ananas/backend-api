@@ -1,15 +1,11 @@
 package com.ananas.backendapi.services;
 
-import com.ananas.backendapi.entities.Device;
 import com.ananas.backendapi.entities.Location;
 import com.ananas.backendapi.mock.MockUtil;
-import com.ananas.backendapi.repositories.DeviceRepository;
 import com.ananas.backendapi.repositories.LocationRepository;
 import com.ananas.backendapi.util.ConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;

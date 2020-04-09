@@ -1,16 +1,11 @@
 package com.ananas.backendapi.gatewayReader;
 
-
 import com.ananas.backendapi.entities.Location;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
 
-/**
- * Sends POST requests to SPRING REST Server
- */
-
 public class DataStoreSaver {
-
     private DataStoreSaver(){}
 
     public static void postList(List<Location> locations){
@@ -22,5 +17,4 @@ public class DataStoreSaver {
             restTemplate.postForObject( uri, location, Location.class);
         }
     }
-
 }

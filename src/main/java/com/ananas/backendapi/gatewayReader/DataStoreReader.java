@@ -1,25 +1,28 @@
 package com.ananas.backendapi.gatewayReader;
 
+import com.ananas.backendapi.BackendApiApplication;
+import com.ananas.backendapi.entities.Location;
+
 import com.ananas.backendapi.entities.Location;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Sends GET requests to the sensor gateway, it parses a list of location objects
- */
-
 public class DataStoreReader {
-
+    private static final Logger logger = LoggerFactory.getLogger(DataStoreReader.class);
     private String URL;
 
     public DataStoreReader(){}
@@ -36,7 +39,6 @@ public class DataStoreReader {
             JsonObject s = ar.get(i).getAsJsonObject();
 
             loc.setUnit(s.get("location").getAsString());
-            loc.setTotal(s.get("total").getAsInt());
             locations.add(loc);
         }
 
@@ -48,7 +50,7 @@ public class DataStoreReader {
         String s = "";
         StringBuilder sb = new StringBuilder();
         try {
-            URL url = new URL(uri);
+            java.net.URL url = new URL(uri);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(10000);
             // If no player found or something other happened, return empty player
@@ -64,13 +66,18 @@ public class DataStoreReader {
             }
 
             conn.disconnect();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        }
+        catch (SocketTimeoutException e)
+        {
+            logger.error("GATEWAY SERVICE DID NOT READ");
+        }
+        catch (MalformedURLException e) {
+            logger.error("GATEWAY SERVICE DID NOT READ");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("GATEWAY SERVICE DID NOT READ");
         }
+
         return sb.toString();
     }
 }

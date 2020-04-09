@@ -3,15 +3,14 @@ package com.ananas.backendapi.controllers;
 import com.ananas.backendapi.entities.Location;
 import com.ananas.backendapi.repositories.LocationRepository;
 import com.ananas.backendapi.services.LocationService;
+import com.ananas.backendapi.util.ConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * RestController endpoint, this class receives the REST calls at /locations
- */
 
 @RestController
 @CrossOrigin(origins = "*")

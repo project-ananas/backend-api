@@ -1,16 +1,12 @@
 package com.ananas.backendapi.gatewayReader;
 
-import com.ananas.backendapi.properties.ConfigProperties;
+import com.ananas.backendapi.util.ConfigProperties;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Task scheduling service for gateway task. Use TIME property to change time in minutes
- */
 public class GatewayService implements Runnable {
-
     private int time;
     private TimeUnit timeUnit;
     private String url;

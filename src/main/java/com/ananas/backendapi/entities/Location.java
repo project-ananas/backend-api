@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Location entity
@@ -17,14 +15,15 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Location {
-
     private String unit;
-    private int total;
     private Timestamp time = new Timestamp(System.currentTimeMillis());
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Location() {
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     public void setTime(Timestamp time) {
@@ -37,13 +36,5 @@ public class Location {
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 }

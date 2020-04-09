@@ -1,23 +1,21 @@
 package com.ananas.backendapi.services;
 
+import com.ananas.backendapi.entities.Device;
 import com.ananas.backendapi.entities.Location;
-import com.ananas.backendapi.properties.ConfigProperties;
+import com.ananas.backendapi.mock.MockUtil;
+import com.ananas.backendapi.repositories.DeviceRepository;
 import com.ananas.backendapi.repositories.LocationRepository;
+import com.ananas.backendapi.util.ConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-/**
- * Abstraction class to
- */
 
 @Service
 public class LocationService {
-
     @Autowired
     LocationRepository repository;
 
@@ -35,19 +33,8 @@ public class LocationService {
     }
 
     public List<Location> getAll() {
-       if(!properties.isDebug()) return repository.findAll();
-
-        ArrayList<Location> locations = new ArrayList<>();
-        Location loc1 = new Location();
-        loc1.setUnit("test");
-        loc1.setTotal(42);
-        locations.add(loc1);
-
-        Location loc2 = new Location();
-        loc2.setUnit("test1");
-        loc2.setTotal(42);
-        locations.add(loc2);
-
-        return locations;
+        // Return list of test items else return actual database values
+        if (properties.isDebug()) return MockUtil.listOfLocations();
+        return repository.findAll();
     }
 }

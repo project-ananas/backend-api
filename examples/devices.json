@@ -1,0 +1,49 @@
+[
+    {
+        "id": 0,
+        "location": {
+            "unit": "Test unit 1",
+            "time": "2020-04-09T08:27:50.543+0000",
+            "id": 0
+        },
+        "time": "2020-04-09T08:27:50.543+0000",
+        "firstSeen": "2020-04-09T08:27:50.543+0000",
+        "vendor": "Test vendor0",
+        "active": 0
+    },
+    {
+        "id": 1,
+        "location": {
+            "unit": "Test unit 2",
+            "time": "2020-04-09T08:27:50.543+0000",
+            "id": 0
+        },
+        "time": "2020-04-09T08:27:50.543+0000",
+        "firstSeen": "2020-04-09T08:27:50.543+0000",
+        "vendor": "Test vendor1",
+        "active": 0
+    },
+    {
+        "id": 2,
+        "location": {
+            "unit": "Test unit 3",
+            "time": "2020-04-09T08:27:50.543+0000",
+            "id": 0
+        },
+        "time": "2020-04-09T08:27:50.543+0000",
+        "firstSeen": "2020-04-09T08:27:50.543+0000",
+        "vendor": "Test vendor2",
+        "active": 0
+    },
+    {
+        "id": 3,
+        "location": {
+            "unit": "Test unit 4",
+            "time": "2020-04-09T08:27:50.543+0000",
+            "id": 0
+        },
+        "time": "2020-04-09T08:27:50.543+0000",
+        "firstSeen": "2020-04-09T08:27:50.543+0000",
+        "vendor": "Test vendor3",
+        "active": 0
+    }

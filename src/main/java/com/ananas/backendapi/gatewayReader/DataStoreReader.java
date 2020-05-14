@@ -1,15 +1,18 @@
 package com.ananas.backendapi.gatewayReader;
 
+import com.ananas.backendapi.entities.Device;
 import com.ananas.backendapi.entities.Location;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
@@ -20,12 +23,12 @@ import java.util.List;
 public class DataStoreReader {
     private static final Logger logger = LoggerFactory.getLogger(DataStoreReader.class);
     private String URL;
+    private static final String EXCEPTION =  "GATEWAY SERVICE DID NOT READ";
 
-    public DataStoreReader(){}
-
-    public static List<Location> getLocations(String url){
+    public static List<Device> getDevices(String url){
         String json = getFromUrl(url);
-        List<Location> locations = new ArrayList<>();
+        ArrayList<Device> devices = new ArrayList<>();
+
         JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
 
         JsonArray ar = convertedObject.getAsJsonArray("locations");
@@ -33,12 +36,20 @@ public class DataStoreReader {
         for (int i = 0; i < ar.size(); i++){
             Location loc = new Location();
             JsonObject s = ar.get(i).getAsJsonObject();
-
             loc.setUnit(s.get("location").getAsString());
-            locations.add(loc);
+            Gson gson = new Gson();
+
+            Type type = new TypeToken<ArrayList<Device>>(){}.getType();
+            ArrayList<Device>locDevices = gson.fromJson(s.get("devices"),type);
+
+            for (Device dev: locDevices)
+            {
+                dev.setLocation(loc);
+                devices.add(dev);
+            }
         }
 
-        return locations;
+        return devices;
     }
 
     // Get Json from URL
@@ -63,15 +74,11 @@ public class DataStoreReader {
 
             conn.disconnect();
         }
-        catch (SocketTimeoutException e)
+        catch (SocketTimeoutException | MalformedURLException e)
         {
-            logger.error("GATEWAY SERVICE DID NOT READ");
-        }
-        catch (MalformedURLException e) {
-            logger.error("GATEWAY SERVICE DID NOT READ");
-
+            logger.error(EXCEPTION);
         } catch (IOException e) {
-            logger.error("GATEWAY SERVICE DID NOT READ");
+            logger.error(EXCEPTION);
         }
 
         return sb.toString();

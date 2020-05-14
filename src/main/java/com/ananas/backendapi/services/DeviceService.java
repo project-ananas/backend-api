@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,20 +20,10 @@ public class DeviceService {
     private DeviceRepository repository;
 
     @Autowired
+    private LocationService locationService;
+
+    @Autowired
     private ConfigProperties properties;
-
-    public List<Device> getDevicesByLocation(@PathVariable String location){
-        if(properties.isDebug()){
-            ArrayList<Device> devices = new ArrayList<>();
-            MockUtil.listOfDevices().forEach(dd -> {
-                if(dd.getLocation().getUnit().equals(location)){
-                 devices.add(dd);
-                }});
-            return devices;
-        }
-
-        return repository.findAllByLocation_Unit(location);
-    }
 
     public List<Device> getAllDevices(){
         if(properties.isDebug()){
@@ -40,4 +32,20 @@ public class DeviceService {
 
         return repository.findAll();
     }
+
+    public List<Device>saveAll(List<Device> devices){
+        for (Device dev: devices)
+        {
+           if(locationService.getByName(dev.getLocation().getUnit()).isPresent()){
+               dev.setLocation(locationService.getByName(dev.getLocation().getUnit()).get());
+
+           }
+           else{
+               locationService.save(dev.getLocation());
+           }
+        }
+
+        return repository.saveAll(devices);
+    }
+
 }

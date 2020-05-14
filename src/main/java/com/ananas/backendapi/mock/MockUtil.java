@@ -37,7 +37,7 @@ public class MockUtil {
             dev.setTime(new Timestamp(System.currentTimeMillis()));
             dev.setLocation(locations.get(i));
             dev.setVendor("Test vendor" + i);
-            dev.setFirstSeen(new Timestamp(System.currentTimeMillis()));
+            dev.setFirst_seen(new Timestamp(System.currentTimeMillis()));
             devices.add(dev);
         }
 

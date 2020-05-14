@@ -1,20 +1,21 @@
 package com.ananas.backendapi.gatewayReader;
 
-import com.ananas.backendapi.entities.Location;
+import com.ananas.backendapi.entities.Device;
+import com.google.gson.Gson;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataStoreSaver {
-    private DataStoreSaver(){}
 
-    public static void postList(List<Location> locations){
-        final String uri = "http://localhost/locations/";
+    public static void postList(List<Device> devices) {
+        final String uri = "http://localhost:8082/devices/";
 
-        for (Location location : locations)
-        {
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.postForObject( uri, location, Location.class);
-        }
+        RestTemplate restTemplate = new RestTemplate();
+        Gson gson = new Gson();
+        String json = gson.toJson(devices);
+        restTemplate.postForObject(uri, json, String.class);
     }
 }

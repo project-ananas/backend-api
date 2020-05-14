@@ -1,8 +1,11 @@
 package com.ananas.backendapi.gatewayReader;
 
+import com.ananas.backendapi.entities.Device;
 import com.ananas.backendapi.entities.Location;
 
 import java.util.List;
+
+import static com.ananas.backendapi.gatewayReader.DataStoreReader.getDevices;
 
 public class GatewayTask implements Runnable {
 
@@ -18,7 +21,8 @@ public class GatewayTask implements Runnable {
     public void run() {
         if(debug) return;
         System.out.println("Reading data from sensor gateway");
-        List<Location> locations = DataStoreReader.getLocations(url);
-        if(locations != null) DataStoreSaver.postList(locations);
+        //List<Location> locations
+        List<Device> devices = DataStoreReader.getDevices(url);
+        if(devices.size() > 0) DataStoreSaver.postList(devices);
     }
 }

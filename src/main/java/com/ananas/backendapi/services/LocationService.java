@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationService {
@@ -18,19 +19,13 @@ public class LocationService {
     @Autowired
     private ConfigProperties properties;
 
-    public Location save(Location l){ return repository.save(l); }
-
-    public void saveAll(ArrayList<Location> locations){
-        repository.saveAll(locations);
+    public Location save(Location l){
+        return repository.save(l);
     }
 
-    public Location get(int id) {
-        return  repository.findById(id).get();
+    public Optional<Location>getByName(String name){
+        return repository.getByUnit(name);
     }
 
-    public List<Location> getAll() {
-        // Return list of test items else return actual database values
-        if (properties.isDebug()) return MockUtil.listOfLocations();
-        return repository.findAll();
-    }
+
 }
